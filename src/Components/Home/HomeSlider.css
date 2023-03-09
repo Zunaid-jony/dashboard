@@ -1,0 +1,24 @@
+.slide{
+    /* background-color: brown; */
+}
+.arrows{
+    font-size: 20px;
+    padding: 2px;
+    background-color: white;
+    border-radius: 100%;
+    box-shadow: 0 0 5px rgb(238, 232, 232);
+    display: flex;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 220px;
+    z-index: 10;
+    color: #fc6103;
+}
+.arrow-right{
+    right: 0px;
+
+}
+.hight-class{
+    height: 80vh;
+}

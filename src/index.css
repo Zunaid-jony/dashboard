@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* For Scroll bar Customization */
+
+
+html {
+  scroll-behavior: smooth;
+
+  --scrollbarBG: #e8eaf6;
+  --thumbBG: #d83030;
+  --scrollbar: #ffffff;
+  --thumb: #a9a0ff;
+}
+
+body::-webkit-scrollbar {
+  width: 13px;
+}
+
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  color:black;
+  width: 100%;
+  height: 100vh;
+  background: #f1f5f9;
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+body::-webkit-scrollbar-track {
+  --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+    var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  background: var(--scrollbarBG);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+/* For Nav Bar Style*/
+
+.scrolled {
+  background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .scrolled {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: saturate(180%) blur(5px);
+    -webkit-backdrop-filter: saturate(180%) blur(5px);
+    transition: all 0.3s ease-in-out;
+    box-shadow: rgb(0 0 0 / 10%) 0px 3px 20px;
+  }
+}

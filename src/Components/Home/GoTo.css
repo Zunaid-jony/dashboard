@@ -1,0 +1,23 @@
+ .styled{
+
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+ 
+  
+    @keyframes gototop {
+      0% {
+        transform: translateY(-0.5rem);
+      }
+      100% {
+        transform: translateY(1rem);
+      }
+    }
+  }
+
+
+
+ 
+ 
+ 
