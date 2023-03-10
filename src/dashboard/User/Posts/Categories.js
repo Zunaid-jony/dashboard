@@ -260,7 +260,7 @@ const Categories = () => {
 
 
 
-                    <div class="col-span-6 sm:col-span-3">
+                    {/* <div class="col-span-6 sm:col-span-3">
               <label
                 for="country"
                 class="block text-sm font-medium text-gray-700 text-left"
@@ -321,7 +321,7 @@ const Categories = () => {
                   Digital Access Control Door Lock
                 </option>
               </select>
-            </div>
+            </div> */}
 
                     <div className="mt-4">
                       <div className="flex justify-between">
@@ -430,25 +430,25 @@ const Categories = () => {
                               scope="col"
                               className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
                             >
-                              Title
+                              Image
                             </th>
                             <th
                               scope="col"
                               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900  hidden sm:block"
                             >
-                              Author
+                              Name
                             </th>
                             <th
                               scope="col"
                               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                             >
-                              Date
+                              Description
                             </th>
                             <th
                               scope="col"
                               className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900  hidden sm:block"
                             >
-                              Tags
+                              Slug
                             </th>
                             <th
                               scope="col"
@@ -471,6 +471,18 @@ const Categories = () => {
 
                           {filteredProducts?.map((person) => (
                             <tr key={person?._id}>
+
+
+
+<td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                                <div className="flex items-center">
+                                  <div className="ml-4">
+                                    <div className="font-medium text-gray-900 w-12 h-12">
+                                      <img src={person?.image} alt="" />
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
                               <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                 <div className="flex items-center">
                                   <div className="ml-4">
@@ -483,28 +495,18 @@ const Categories = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
-                                <div className="flex items-center">
-                                  <div className="ml-4">
-                                    <div className="font-medium text-gray-900 w-12 h-12">
-                                      <img src={person?.image} alt="" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </td>
+                             
 
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                <p>1/23/2023</p>
+                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-12">
+                                {person?.shortDescription}
                               </td>
-                              <td className="whitespace-nowrap text-left px-3 py-4 text-sm text-gray-500 mt-3  hidden sm:block">
-                                {person?.email}
-                              </td>
+                              
                               <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
                                 <Link
                                   to="/"
                                   className="text-indigo-600 hover:text-indigo-900"
                                 >
-                                  View {person?.category}
+                                   {person?.price}
                                   <span className="sr-only">
                                     , {person?.name}
                                     , {person?.category}

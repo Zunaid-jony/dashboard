@@ -136,7 +136,7 @@ const AllProducts = () => {
   };
 
   const filteredProducts = currentItems.filter((product) =>
-    product?.productName.toLowerCase().includes(searchTerm.toLowerCase())
+    product?.productName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // search end
@@ -351,6 +351,12 @@ const AllProducts = () => {
                           scope="col"
                           className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
+                          status
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        >
                           Edit
                         </th>
                       </tr>
@@ -439,6 +445,11 @@ const AllProducts = () => {
                                 <AiTwotoneDelete
                                   onClick={() => deleteItem(product._id)}
                                 ></AiTwotoneDelete>
+                              </p>
+                            </td>
+                            <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
+                              <p className="text-[#e93939] text-xl cursor-pointer">
+                               {product?.status}
                               </p>
                             </td>
                             <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">

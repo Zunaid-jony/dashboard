@@ -52,6 +52,7 @@ const AddProducts = () => {
         ...values,
         image: imageUrl,
         createdDate: new Date(),
+        status: "Draft",
       };
       const anotherApiResponse = await axios.post(
         "https://primeautomationapiapi.primeautomaticdoor.com/products",
@@ -117,6 +118,25 @@ const AddProducts = () => {
                 required
               />
             </div>
+
+
+
+            {/* Editor  start......... */}
+            {/* Editor ......... */}
+            {/* Editor ......... */}
+            <br />
+            <br />
+          
+            <div className="card">
+              <Editor
+                value={text}
+                onTextChange={(e) => setText(e.htmlValue)}
+                style={{ height: "320px" }}
+              />
+            </div>
+
+            {/* Editor end ......... */}
+            {/* Editor ......... */}
             <div className="mt-3 text-left mb-8">
               <label
                 className="block mb-2 text-sm font-medium "
@@ -201,23 +221,7 @@ const AddProducts = () => {
               </select>
             </div>
 
-            {/* Editor  start......... */}
-            {/* Editor ......... */}
-            {/* Editor ......... */}
-            <br />
-            <br />
-            <br />
-            <br />
-            <div className="card">
-              <Editor
-                value={text}
-                onTextChange={(e) => setText(e.htmlValue)}
-                style={{ height: "320px" }}
-              />
-            </div>
-
-            {/* Editor end ......... */}
-            {/* Editor ......... */}
+            
 
             {/* <div className="mt-3 text-left mb-8">
               <label
@@ -276,8 +280,6 @@ const AddProducts = () => {
                 {/* <button class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 ml-auto">
                   Save Publish
                 </button> */}
-
-
 
                 <CommonButton
                   className="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 ml-auto"

@@ -64,6 +64,7 @@ const EditProduct = () => {
       shortDescription:  product.shortDescription,
       productTag:  product.productTag,
       category:product.category,
+      status:product.status,
     },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
@@ -95,10 +96,12 @@ const EditProduct = () => {
         ...values,
         image: imageUrl,
         createdDate: new Date(),
-        upsertedId:product?._id,
+        // upsertedId:product?._id,
       };
       const anotherApiResponse = await axios.put(
-        `https://primeautomationapiapi.primeautomaticdoor.com/products`,
+        // http://localhost:5000/
+        `http://localhost:5000/products/${product?._id}`,
+        // `https://primeautomationapiapi.primeautomaticdoor.com/products`,
         allData
       );
       console.log(anotherApiResponse);
@@ -222,51 +225,101 @@ const EditProduct = () => {
 
 
 
-          <div class="col-span-6 sm:col-span-3">
+          <div class="col-span-6 sm:col-span-3 mb-2">
             <label
               for="country"
               class="block text-sm font-medium text-gray-700 text-left"
             >
-          Update New Category
+           Status 
 
             </label>
             <select
 
 
-              id="category"
-              name="category"
+              id="status"
+              name="status"
              
             
-              autocomplete="category"
+              autocomplete="status"
 
               onChange={formik.handleChange}
               
               class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             >
-              <option value={formik.values.category}>
+              <option value={formik.values.status}>
                 Select Category
               </option>
-              <option value="Accessories">Accessories</option>
-              <option value="Aotumatic_RollingShutter">Aotumatic Rolling shutter</option>
-              <option value="Autoatic_GateSystem">Autoatic Gate System</option>
-              <option value="AutomaticRevolvingDoor">Automatic Revolving Door</option>
-              <option value="LCD_Advertising_Display_Klosk">LCD Advertising Display Klosk</option>
-              <option value="Motor_for_Rolling_shutter">Motor for Rolling shutter</option>
-              <option value="Automatic_Swing_Door">Automatic Swing Door</option>
-              <option value="Archway_Gate-walk_Though_Metal_Detector">Archway Gate-walk Though Metal Detector</option>
-              <option value="Car_Parking_Barrier">Car Parking Barrier</option>
-              <option value="Safety_Barrier">Safety Barrier</option>
-              <option value="Motor_For">Motor For Sliding / Swing Gate</option>
-              <option value="Motor">Motor For Sliding / Swing Gate</option>
-              <option value="Wifi">Wifi Control Home Automation System</option>
-              <option value="Hydraulic">Hydraulic Dock Leveler / Hydraulic Scissor Lift</option>
-              <option value="Movable">Movable/ folding Partition Wall</option>
-              <option value="Movable_folding">Movable/ folding Partition Wall</option>
-              <option value="Turnstile">Turnstile and Barner</option>
-              <option value="Automatic">Automatic Car Parking Management System</option>
-              <option value="Digital">Digital Access Control Door Lock</option>
+              <option value="Draft">Draft</option>
+              <option value="Active">Active</option>
+              {/* status: "Draft", */}
             </select>
           </div>
+
+
+
+
+          <div class="col-span-6 sm:col-span-3">
+              <label
+                for="country"
+                class="block text-sm font-medium text-gray-700 text-left"
+              >
+               Update New Category
+              </label>
+              <select
+                id="category"
+                name="category"
+                autocomplete="category"
+                onChange={formik.handleChange}
+                class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value={formik.values.category}>Select Category</option>
+                <option value="Accessories">Accessories</option>
+                <option value="Aotumatic_RollingShutter">
+                  Aotumatic Rolling shutter
+                </option>
+                <option value="Autoatic_GateSystem">
+                  Autoatic Gate System
+                </option>
+                <option value="AutomaticRevolvingDoor">
+                  Automatic Revolving Door
+                </option>
+                <option value="LCD_Advertising_Display_Klosk">
+                  LCD Advertising Display Klosk
+                </option>
+                <option value="Motor_for_Rolling_shutter">
+                  Motor for Rolling shutter
+                </option>
+                <option value="Automatic_Swing_Door">
+                  Automatic Swing Door
+                </option>
+                <option value="Archway_Gate-walk_Though_Metal_Detector">
+                  Archway Gate-walk Though Metal Detector
+                </option>
+                <option value="Car_Parking_Barrier">Car Parking Barrier</option>
+                <option value="Safety_Barrier">Safety Barrier</option>
+                <option value="Motor_For">
+                  Motor For Sliding / Swing Gate
+                </option>
+                <option value="Motor">Motor For Sliding / Swing Gate</option>
+                <option value="Wifi">
+                  Wifi Control Home Automation System
+                </option>
+                <option value="Hydraulic">
+                  Hydraulic Dock Leveler / Hydraulic Scissor Lift
+                </option>
+                <option value="Movable">Movable/ folding Partition Wall</option>
+                <option value="Movable_folding">
+                  Movable/ folding Partition Wall
+                </option>
+                <option value="Turnstile">Turnstile and Barner</option>
+                <option value="Automatic">
+                  Automatic Car Parking Management System
+                </option>
+                <option value="Digital">
+                  Digital Access Control Door Lock
+                </option>
+              </select>
+            </div>
 
 
 
