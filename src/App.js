@@ -51,6 +51,7 @@ import CategoryDitails from "./dashboard/Products/CategoryDitails/CategoryDitail
 import PrivateRoute from "./Components/Authentication/PrivateRoute";
 import EditProduct from "./dashboard/Products/EditProduct";
 import EditCategoris from "./dashboard/User/Posts/EditCategoris";
+import productPreview from './dashboard/Products/productPreview';
 
 function App() {
   return (
@@ -111,6 +112,10 @@ function App() {
               <Route
                 path="addNew"
                 element={<AddProducts></AddProducts>}
+              ></Route>
+              <Route
+                path="/preview"
+                element={<productPreview></productPreview>}
               ></Route>
               <Route
                 index

@@ -9,8 +9,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { CommonButton } from "../../Components/Button/Button";
 import { useFormik } from "formik";
 import { Editor } from "primereact/editor";
+import { Dialog } from "primereact/dialog";
+import productPreview from './productPreview';
+import { toast, ToastContainer } from "react-toastify";
 
 const AddProducts = () => {
+
+  const [displayBasic, setDisplayBasic] = useState(false);
+  const dialogFuncMap = {
+    displayBasic: setDisplayBasic,
+  };
+  const onClick = (name, position) => {
+    dialogFuncMap[`${name}`](true);
+  };
+  const onHide = (name) => {
+    dialogFuncMap[`${name}`](false);
+  };
+
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
   const [image1, setImage1] = useState(null);
@@ -23,6 +38,7 @@ const AddProducts = () => {
       shortDescription: "",
       productTag: "",
       category: "",
+      status:"",
     },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
@@ -52,7 +68,7 @@ const AddProducts = () => {
         ...values,
         image: imageUrl,
         createdDate: new Date(),
-        status: "Draft",
+        // status: "Draft",
       };
       const anotherApiResponse = await axios.post(
         "https://primeautomationapiapi.primeautomaticdoor.com/products",
@@ -60,6 +76,7 @@ const AddProducts = () => {
       );
       console.log(anotherApiResponse);
       navigate("/");
+      toast.success('Product add successfully.');
     } catch (error) {
       setLoading(false);
     }
@@ -143,7 +160,7 @@ const AddProducts = () => {
                 for="shortDescription"
                 placeholder="Inter Your Email"
               >
-                Product short description
+                Product short description 
               </label>
               <textarea
                 id="shortDescription"
@@ -248,12 +265,51 @@ const AddProducts = () => {
               <p className="p-2 w-full text-left"></p>
               <hr />
               <div className="flex justify-between mt-2">
-                <button class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                  Save Draft
-                </button>
-                <button class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              <div class="col-span-6 sm:col-span-3 mb-2">
+                <label
+                  for="country"
+                  class="block text-sm font-medium text-gray-700 text-left"
+                >
+                  Status
+                </label>
+                <select
+                  id="status"
+                  name="status"
+                  autocomplete="status"
+                  onChange={formik.handleChange}
+                  class="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                >
+                  <option value={formik.values.status}>Select Category</option>
+                  <option value="Draft">Draft</option>
+                  <option value="Active">Active</option>
+                  {/* status: "Draft", */}
+                </select>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             
+               <button class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+               
+               onClick={() => {
+                onClick("displayBasic");
+              }}
+               >
                   Preview
                 </button>
+             
+               
               </div>
               <p className="mt-2 text-left flex">
                 {" "}
@@ -369,7 +425,7 @@ const AddProducts = () => {
               </div>
 
               <hr />
-              <div className="mt-2 ">
+              {/* <div className="mt-2 ">
                 <CommonButton
                   className="p-mr-2 p-button-raised p-button-secondary"
                   title="Save"
@@ -380,10 +436,24 @@ const AddProducts = () => {
                   color="p-button-raised p-button-success"
                   loading={loading}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
+
+        <Dialog
+        className="text-l"
+        blockScroll
+        header="Preview"
+        visible={displayBasic}
+        style={{ width: "60vw" }}
+        onHide={() => onHide("displayBasic")}
+        id="fname"
+        maximizable
+      >
+        <productPreview />
+      </Dialog>
+      <ToastContainer />
       </div>
     </form>
   );

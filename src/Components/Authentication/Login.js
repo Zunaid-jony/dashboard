@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { CommonButton } from "../Button/Button";
 import { setUserSession } from "./loginStorage";
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -48,6 +49,7 @@ const Login = () => {
 
         localStorage.setItem("auth",true)
         navigate("/");
+        toast.success('login successfully.');
       }
     } catch (error) {
       setLoading(false);
@@ -161,6 +163,7 @@ const Login = () => {
         </div>
         <div className="hidden bg-cover lg:block lg:w-1/2 login-url bg-blue-500 "></div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

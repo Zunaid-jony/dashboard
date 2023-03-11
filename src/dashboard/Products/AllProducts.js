@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import "./Pagination.css";
 import { Dialog } from "primereact/dialog";
@@ -13,6 +13,9 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import AllProductModal from "./AllProductModal";
+
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const AllProducts = () => {
   const [displayBasic, setDisplayBasic] = useState(false);
@@ -79,7 +82,9 @@ const AllProducts = () => {
       }
     ).then((result) => {
       result.json().then((resp) => {
-        alert("Hello world!");
+       
+        //  toast("Product deleted successfully");
+         toast.success('Product deleted successfully.');
         console.warn(resp);
         // toast.success('Product deleted successfully.');
         // alert="dfdfdfdf"
@@ -385,6 +390,7 @@ const AllProducts = () => {
                                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                       ></input>
                                     </span>
+                                   
 
                                     <img
                                       className="w-6 h-6 ml-auto mr-auto"
@@ -507,7 +513,7 @@ const AllProducts = () => {
         nextLinkClassName="page-num"
         activeLinkClassName="active"
       />
-
+<ToastContainer />
      
     </div>
   );
