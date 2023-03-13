@@ -23,7 +23,7 @@ const Categories = () => {
       discount: "",
       file: null,
       description: "",
-      shortDescription:"",
+      shortDescription: "",
     },
     // validationSchema: signUpSchema,
     onSubmit: (values, { resetForm }) => {
@@ -56,6 +56,7 @@ const Categories = () => {
       const allData = {
         ...values,
         image: imageUrl,
+        status: "Draft",
       };
       const anotherApiResponse = await axios.post(
         "https://primeautomationapiapi.primeautomaticdoor.com/image",
@@ -63,7 +64,7 @@ const Categories = () => {
         allData
       );
       console.log(anotherApiResponse);
-      // toast.success("Product added successfully")
+      toast.success("Product added successfully")
       navigate("/");
     } catch (error) {
       setLoading(false);
@@ -82,7 +83,7 @@ const Categories = () => {
       setLoading(true);
       await axios
         .get(
-          `https://primeautomationapiapi.primeautomaticdoor.com/image`
+          `https://primeautomationapiapi.primeautomaticdoor.com/products`
           // ` https://prime-automation-server-production.up.railway.app/product`
         )
         .then(function (res) {
@@ -128,7 +129,7 @@ const Categories = () => {
   const [pageCount, setPageCount] = useState(1);
 
   const [itemOffset, setItemOffset] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 4;
 
   useEffect(() => {
     // Fetch images from another resources.
@@ -156,26 +157,46 @@ const Categories = () => {
     product?.productName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
   );
 
+  // delete
+  function deleteItem(id) {
+    fetch(`https://primeautomationapiapi.primeautomaticdoor.com/image/${id}`, {
+      method: "DELETE",
+    }).then((result) => {
+      result.json().then((resp) => {
+        alert("Delete Successfully");
+        console.warn(resp);
+        // toast.success('Product deleted successfully.');
+        // alert="dfdfdfdf"
+
+        ProductData();
+        // getDelete()
+      });
+    });
+  }
+
+
 
    // delete
- function deleteItem(id) {
-  fetch(
-    `https://primeautomationapiapi.primeautomaticdoor.com/image/${id}`,
-    {
-      method: "DELETE",
-    }
-  ).then((result) => {
-    result.json().then((resp) => {
-      alert("Delete Successfully");
-      console.warn(resp);
-      // toast.success('Product deleted successfully.');
-      // alert="dfdfdfdf"
+   function deleteItem(id) {
+    fetch(
+      `https://primeautomationapiapi.primeautomaticdoor.com/products/${id}`,
+      {
+        method: "DELETE",
+      }
+    ).then((result) => {
+      result.json().then((resp) => {
+       
+        //  toast("Product deleted successfully");
+         toast.success('Product deleted successfully.');
+        console.warn(resp);
+        // toast.success('Product deleted successfully.');
+        // alert="dfdfdfdf"
 
-      ProductData();
-      // getDelete()
+        ProductData();
+        // getDelete()
+      });
     });
-  });
-}
+  }
 
   return (
     <div className=" container ml-auto mr-auto">
@@ -215,23 +236,23 @@ const Categories = () => {
                     </div>
                     <br />
                     <div className="mt-3 text-left mb-8">
-              <label
-                className="block mb-2 text-sm font-medium "
-                for="shortDescription"
-                placeholder="Inter Your Email"
-              >
-                Product short description
-              </label>
-              <textarea
-                id="shortDescription"
-                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
-                type="text"
-                name="shortDescription"
-                onChange={formik.handleChange}
-                value={formik.values.shortDescription}
-                required
-              />
-            </div>
+                      <label
+                        className="block mb-2 text-sm font-medium "
+                        for="shortDescription"
+                        placeholder="Inter Your Email"
+                      >
+                        Product short description
+                      </label>
+                      <textarea
+                        id="shortDescription"
+                        className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+                        type="text"
+                        name="shortDescription"
+                        onChange={formik.handleChange}
+                        value={formik.values.shortDescription}
+                        required
+                      />
+                    </div>
 
                     <div className="mt-4 text-left">
                       <label
@@ -260,7 +281,7 @@ const Categories = () => {
 
 
 
-                    {/* <div class="col-span-6 sm:col-span-3">
+                    <div class="col-span-6 sm:col-span-3">
               <label
                 for="country"
                 class="block text-sm font-medium text-gray-700 text-left"
@@ -321,7 +342,10 @@ const Categories = () => {
                   Digital Access Control Door Lock
                 </option>
               </select>
-            </div> */}
+            </div>
+
+
+
 
                     <div className="mt-4">
                       <div className="flex justify-between">
@@ -454,13 +478,13 @@ const Categories = () => {
                               scope="col"
                               className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                             >
-                             Edit
+                              Edit
                             </th>
                             <th
                               scope="col"
                               className="relative py-3.5 pl-3 pr-4 sm:pr-6"
                             >
-                             Delete
+                              Delete
                             </th>
                           </tr>
                         </thead>
@@ -471,10 +495,7 @@ const Categories = () => {
 
                           {filteredProducts?.map((person) => (
                             <tr key={person?._id}>
-
-
-
-<td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                              <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                                 <div className="flex items-center">
                                   <div className="ml-4">
                                     <div className="font-medium text-gray-900 w-12 h-12">
@@ -495,43 +516,42 @@ const Categories = () => {
                                   </div>
                                 </div>
                               </td>
-                             
 
-                              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500 w-12">
-                                {person?.shortDescription}
+                              <td className="  text-sm text-gray-500 w-28">
+                               <p className=""> {person?.shortDescription}</p>
                               </td>
-                              
+
                               <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
                                 <Link
                                   to="/"
                                   className="text-indigo-600 hover:text-indigo-900"
                                 >
-                                   {person?.price}
+                                  {person?.price}
                                   <span className="sr-only">
-                                    , {person?.name}
-                                    , {person?.category}
+                                    , {person?.name}, {person?.category}
                                   </span>
                                 </Link>
                               </td>
 
                               <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
-                              <p className="text-[#e93939] text-xl cursor-pointer">
-                                <AiTwotoneDelete
-                                  onClick={() => deleteItem(person?._id)}
-                                ></AiTwotoneDelete>
-                              </p>
-                            </td>
+                                <p className="text-[#e93939] text-xl cursor-pointer">
+                                  <AiTwotoneDelete
+                                  
+                                    onClick={() => deleteItem(person?._id)}
+                                  ></AiTwotoneDelete>
+                                </p>
+                              </td>
 
-
-                            <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
-                              <p className="text-[#3971e9] text-sm cursor-pointer"
-                              
-                              onClick={() => {
-                                navigate(`/editCategoris/${person?._id}`);
-                              }}>
-                               Edit
-                              </p>
-                            </td>
+                              <td className="text-left relative whitespace-nowrap py-4 pl-3 pr-4  text-sm font-medium sm:pr-6">
+                                <p
+                                  className="text-[#3971e9] text-sm cursor-pointer"
+                                  onClick={() => {
+                                    navigate(`/editCategoris/${person?._id}`);
+                                  }}
+                                >
+                                  Edit
+                                </p>
+                              </td>
                             </tr>
                           ))}
                         </tbody>

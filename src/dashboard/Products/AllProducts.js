@@ -17,7 +17,13 @@ import AllProductModal from "./AllProductModal";
 
 import 'react-toastify/dist/ReactToastify.css';
 
+import parse from 'html-react-parser';
+
+// CommonJS
+
+
 const AllProducts = () => {
+  const parse = require('html-react-parser');
   const [displayBasic, setDisplayBasic] = useState(false);
   const dialogFuncMap = {
     displayBasic: setDisplayBasic,
@@ -378,9 +384,9 @@ const AllProducts = () => {
 
                         filteredProducts.map((product) => (
                           <tr key={product._id}>
-                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                            <td className=" py-4 pl-4 pr-3 text-sm sm:pl-6">
                               <div className="flex items-center">
-                                <div className="ml-4">
+                                <div className="ml-4 w-28">
                                   <div className="font-medium text-gray-900 flex">
                                     <span className="mr-2 mt-1">
                                       <input
@@ -397,11 +403,11 @@ const AllProducts = () => {
                                       src={product?.image}
                                       alt=""
                                     />
-                                    <p className="ml-2">
+                                    <p className="ml-2 w-full">
                                       {product?.productName}
                                     </p>
                                   </div>
-                                  <div className="text-gray-500  hidden sm:block">
+                                  <div className="text-gray-500  hidden sm:block ">
                                     {product?.productTag}
                                   </div>
                                 </div>
@@ -482,8 +488,16 @@ const AllProducts = () => {
         id="fname"
         maximizable
       >
-        <AllProductModal filteredProducts={product} />
+        <AllProductModal product={product} />
       </Dialog>
+
+
+
+<div dangerouslySetInnerHTML={{ __html: product?.editor}} />
+
+
+     
+      {/* {parse(product?.editor)}  */}
                           </tr>
                         ))
                       )}

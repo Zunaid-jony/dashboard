@@ -14,6 +14,7 @@ import productPreview from './productPreview';
 import { toast, ToastContainer } from "react-toastify";
 
 const AddProducts = () => {
+  
 
   const [displayBasic, setDisplayBasic] = useState(false);
   const dialogFuncMap = {
@@ -27,6 +28,7 @@ const AddProducts = () => {
   };
 
   const [text, setText] = useState("");
+  const [text1, setText1] = useState("");
   const [image, setImage] = useState(null);
   const [image1, setImage1] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -68,6 +70,8 @@ const AddProducts = () => {
         ...values,
         image: imageUrl,
         createdDate: new Date(),
+        editor:text,
+        editor1:text1,
         // status: "Draft",
       };
       const anotherApiResponse = await axios.post(
@@ -117,7 +121,7 @@ const AddProducts = () => {
                 required
               />
             </div>
-            <div className="mt-3 text-left mb-8">
+            {/* <div className="mt-3 text-left mb-8">
               <label
                 className="block mb-2 text-sm font-medium"
                 for="description"
@@ -134,7 +138,7 @@ const AddProducts = () => {
                 value={formik.values.description}
                 required
               />
-            </div>
+            </div> */}
 
 
 
@@ -143,7 +147,7 @@ const AddProducts = () => {
             {/* Editor ......... */}
             <br />
             <br />
-          
+            <p className="text-left">Product description</p>
             <div className="card">
               <Editor
                 value={text}
@@ -151,10 +155,20 @@ const AddProducts = () => {
                 style={{ height: "320px" }}
               />
             </div>
+            <br />
+            <br />
+            <p className="text-left"> Product short description </p>
+            <div className="card">
+              <Editor
+                value={text1}
+                onTextChange={(e) => setText1(e.htmlValue)}
+                style={{ height: "320px" }}
+              />
+            </div>
 
             {/* Editor end ......... */}
             {/* Editor ......... */}
-            <div className="mt-3 text-left mb-8">
+            {/* <div className="mt-3 text-left mb-8">
               <label
                 className="block mb-2 text-sm font-medium "
                 for="shortDescription"
@@ -171,7 +185,7 @@ const AddProducts = () => {
                 value={formik.values.shortDescription}
                 required
               />
-            </div>
+            </div> */}
 
             {/* dopd */}
 
