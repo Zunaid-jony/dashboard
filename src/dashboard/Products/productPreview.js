@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const productPreview = () => {
+const productPreview = ({value, value1}) => {
+  console.log("value",value)
   return (
     <div>
-     kkkkkkkkkkkkkkkk
+    ProductName:{value}
+    ProductName:{value1}
        
     </div>
   )

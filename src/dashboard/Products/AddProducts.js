@@ -10,8 +10,11 @@ import { CommonButton } from "../../Components/Button/Button";
 import { useFormik } from "formik";
 import { Editor } from "primereact/editor";
 import { Dialog } from "primereact/dialog";
-import productPreview from './productPreview';
+
+
 import { toast, ToastContainer } from "react-toastify";
+import PreviewMain from './PreviewMain';
+
 
 const AddProducts = () => {
   
@@ -32,6 +35,9 @@ const AddProducts = () => {
   const [image, setImage] = useState(null);
   const [image1, setImage1] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState();
+  const [value1, setValue1] = useState();
+  console.log("OnBlur value",value)
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
@@ -45,6 +51,7 @@ const AddProducts = () => {
     onSubmit: (values, { resetForm }) => {
       console.log(values);
       handleSubmit(values);
+      // handlePrevew(values);
     },
     enableReinitialize: true,
     validateOnChange: false,
@@ -85,6 +92,14 @@ const AddProducts = () => {
       setLoading(false);
     }
   };
+  // const handlePrevew =(values) => {
+  //   // setDisplayBasic(true);
+  //   console.log("value test..>",values)
+  //   // setValue(values);
+    
+    
+  
+  // };
 
   // const handleChange = (e) => {
   //   const file = e.target.files[0];
@@ -109,7 +124,7 @@ const AddProducts = () => {
                 for="productName"
                 placeholder="Inter Your Email"
               >
-                Add new product
+                Add new product 
               </label>
               <input
                 id="productName"
@@ -117,6 +132,10 @@ const AddProducts = () => {
                 type="text"
                 name="productName"
                 onChange={formik.handleChange}
+                onBlur={(e)=>{
+                  setValue(e.target.value)
+                
+                }}
                 value={formik.values.productName}
                 required
               />
@@ -313,15 +332,24 @@ const AddProducts = () => {
 
 
 
+
+
+
              
-               <button class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded"
+               <button class="bg-gray-300 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded" 
                
                onClick={() => {
+               
                 onClick("displayBasic");
               }}
                >
                   Preview
                 </button>
+
+
+
+
+
              
                
               </div>
@@ -433,7 +461,13 @@ const AddProducts = () => {
                   type="text"
                   name="productTag"
                   onChange={formik.handleChange}
+
+                  onBlur={(e)=>{
+                    setValue1(e.target.value)
+                  
+                  }}
                   value={formik.values.productTag}
+                  
                   required
                 />
               </div>
@@ -455,6 +489,11 @@ const AddProducts = () => {
           </div>
         </div>
 
+
+
+
+        
+
         <Dialog
         className="text-l"
         blockScroll
@@ -462,10 +501,12 @@ const AddProducts = () => {
         visible={displayBasic}
         style={{ width: "60vw" }}
         onHide={() => onHide("displayBasic")}
+      
         id="fname"
         maximizable
       >
-        <productPreview />
+       {/* <div>ProductName:{value}</div> */}
+       <PreviewMain value={value} value1={value1}></PreviewMain>
       </Dialog>
       <ToastContainer />
       </div>
