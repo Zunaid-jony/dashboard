@@ -37,6 +37,7 @@ const AddProducts = () => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState();
   const [value1, setValue1] = useState();
+  const [pimg, setPimg] = useState();
   console.log("OnBlur value",value)
   const navigate = useNavigate();
   const formik = useFormik({
@@ -411,6 +412,10 @@ const AddProducts = () => {
                   type="file"
                   name="file1"
                   onChange={handleImage}
+                  onBlur={(e)=>{
+                    setPimg(e.target.value)
+                  
+                  }}
                   placeholder="file"
                 />
               </div>
@@ -506,7 +511,7 @@ const AddProducts = () => {
         maximizable
       >
        {/* <div>ProductName:{value}</div> */}
-       <PreviewMain value={value} value1={value1}></PreviewMain>
+       <PreviewMain value={value} value1={value1} pimg={pimg}></PreviewMain>
       </Dialog>
       <ToastContainer />
       </div>

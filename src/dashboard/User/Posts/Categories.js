@@ -141,7 +141,7 @@ const Categories = () => {
 
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % card.length;
+    const newOffset = (event.selected * itemsPerPage) % card?.length;
     console.log(
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
